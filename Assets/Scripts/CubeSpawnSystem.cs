@@ -10,8 +10,6 @@ public class CubeSpawnSystem : MonoBehaviour
     [SerializeField] float time = 0f;
     [SerializeField] float breakUntill = 5f;
 
-    public bool increment { get; set; } = false;
-
     private int spawnedCubes = 0;
     private int spawnAmount;
 

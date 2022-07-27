@@ -48,6 +48,6 @@ public class Projectile : MonoBehaviour
 
         if (lifetime < MAX_LIFETIME) return;
 
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

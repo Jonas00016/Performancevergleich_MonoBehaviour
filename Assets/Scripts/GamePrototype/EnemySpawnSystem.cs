@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnSystem : MonoBehaviour
 {
-    private const int MAX_ENEMIES = 10000;
+    private const int MAX_ENEMIES = 100000;
     private const int SPAWN_AMOUNT = 100;
     private const float BREAK_TIME = 10f;
 

@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     private void HandleShootProjectile()
     {
         if (!Input.GetKey("space") || Time.time < nextTime) return;
-        nextTime = Time.time + 1 / perSecond;
+        nextTime = Time.time + 1f / perSecond;
 
         Instantiate(projectilePrefab, transform.position, transform.rotation);
     }

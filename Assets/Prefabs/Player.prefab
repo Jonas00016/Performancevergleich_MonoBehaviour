@@ -203,9 +203,9 @@ GameObject:
   - component: {fileID: 6652676970896719057}
   - component: {fileID: 5493777477319915478}
   - component: {fileID: 6179635504001563507}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,3 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36204404cb1b3847a01e9b222520beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4640849794210307963, guid: 6ac9d9e11159ad7489bfa16d4d71d78f, type: 3}

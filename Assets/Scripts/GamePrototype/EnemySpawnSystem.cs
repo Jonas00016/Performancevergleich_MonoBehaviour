@@ -26,45 +26,54 @@ public class EnemySpawnSystem : MonoBehaviour
         if (enemyCount >= MAX_ENEMIES || timer < BREAK_TIME) return;
         timer = 0f;
 
+        SpawnEnemies();
+    }
+
+    private void SpawnEnemies()
+    {
         for (int i = 0; i < SPAWN_AMOUNT; i++)
         {
-            Vector3 spawnPosition;
-
-            if (i < SPAWN_AMOUNT / 4 * 1)
-            {
-                spawnPosition = new Vector3(
-                        Random.Range(-50f, -10f),
-                        0f,
-                        Random.Range(-50f, 50f)
-                    );
-            }
-            else if (i < SPAWN_AMOUNT / 4 * 2)
-            {
-                spawnPosition = new Vector3(
-                        Random.Range(-50f, 50f),
-                        0f,
-                        Random.Range(-50f, -10f)
-                    );
-            }
-            else if (i < SPAWN_AMOUNT / 4 * 3)
-            {
-                spawnPosition = new Vector3(
-                        Random.Range(50f, 10f),
-                        0f,
-                        Random.Range(-50f, 50f)
-                    );
-            }
-            else
-            {
-                spawnPosition = new Vector3(
-                        Random.Range(-50f, 50f),
-                        0f,
-                        Random.Range(50f, 10f)
-                    );
-            }
+            Vector3 spawnPosition = GetSpawnPosition(i);
 
             GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
             spawnedEnemy.transform.LookAt(playerTransform);
         }
+    }
+
+    private Vector3 GetSpawnPosition(int index)
+    {
+        if (index < SPAWN_AMOUNT / 4 * 1)
+        {
+            return new Vector3(
+                    Random.Range(-50f, -10f),
+                    0f,
+                    Random.Range(-50f, 50f)
+                );
+        }
+
+        if (index < SPAWN_AMOUNT / 4 * 2)
+        {
+            return new Vector3(
+                    Random.Range(-50f, 50f),
+                    0f,
+                    Random.Range(-50f, -10f)
+                );
+        }
+
+        if (index < SPAWN_AMOUNT / 4 * 3)
+        {
+            return new Vector3(
+                    Random.Range(50f, 10f),
+                    0f,
+                    Random.Range(-50f, 50f)
+                );
+        }
+       
+        return new Vector3(
+                Random.Range(-50f, 50f),
+                0f,
+                Random.Range(50f, 10f)
+            );
     }
 }

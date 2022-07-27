@@ -24,6 +24,19 @@ public class Projectile : MonoBehaviour
         MoveForward();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.tag.Equals("Enemy")) return;
+
+        DestroyEnemy(collision.gameObject);
+    }
+
+    private void DestroyEnemy(GameObject enemy)
+    {
+        Destroy(enemy);
+        Destroy(gameObject);
+    }
+
     private void MoveForward()
     {
         rb.velocity = transform.forward * MOVEMENTSPEED * Time.deltaTime;

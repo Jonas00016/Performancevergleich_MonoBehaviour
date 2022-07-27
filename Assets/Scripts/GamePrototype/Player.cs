@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private const float MOVEMENTSPEED = 500f;
 
+    [SerializeField] EnemySpawnSystem enemySpawnSystem;
     [SerializeField] GameObject projectilePrefab;
 
     private Rigidbody rb;
@@ -26,6 +27,29 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         HandleMovement();
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.tag.Equals("Enemy")) return;
+
+        HandleGameOver();
+    }
+
+    private void HandleGameOver()
+    {
+        enemySpawnSystem.enabled = false;
+
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+
+        foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
+        {
+            Destroy(projectile);
+        }
+
+        Destroy(gameObject);
     }
 
     private void HandleRotation()

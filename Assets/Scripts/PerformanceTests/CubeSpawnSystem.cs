@@ -11,24 +11,33 @@ public class CubeSpawnSystem : MonoBehaviour
     [SerializeField] float breakUntill = 5f;
 
     private int spawnedCubes = 0;
-    private int spawnAmount;
+    public int _spawnAmount;
+
+    public bool selfIncrement = true;
 
     void Start()
     {
-        spawnAmount = axisLength * axisLength;
+        _spawnAmount = axisLength * axisLength;
     }
 
     void Update()
     {
+        if (!selfIncrement) return;
+
         time += Time.deltaTime;
         if (time < breakUntill) return;
         time = 0f;
 
+        SpawnNextWave();
+    }
+
+    public void SpawnNextWave()
+    {
         for (int x = 0; x < axisLength; x++)
         {
             for (int z = 0; z < axisLength; z++)
             {
-                Vector3 position = new Vector3(x, spawnedCubes / spawnAmount, z) * spacingAmount;
+                Vector3 position = new Vector3(x, spawnedCubes / _spawnAmount, z) * spacingAmount;
                 Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
                 Instantiate(prefab, position, rotation);
 
@@ -36,5 +45,10 @@ public class CubeSpawnSystem : MonoBehaviour
             }
 
         }
+    }
+
+    public int spawnAmount
+    {
+        get => axisLength * axisLength;
     }
 }

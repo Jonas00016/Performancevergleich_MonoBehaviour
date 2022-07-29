@@ -30,6 +30,7 @@ public class PerformanceMeasurer : MonoBehaviour
 #if UNITY_EDITOR
         performanceReportPath = $"Assets/PerformanceReports/{fileName}.csv";
 #else
+        QualitySettings.vSyncCount = 0;
         performanceReportPath = $"{Application.dataPath}/PerformanceReports/{fileName}.csv";
 #endif
 

@@ -1093,4 +1093,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cubeSpawnSystem: {fileID: 2090885855}
   physicsCubeSpawnSystem: {fileID: 1082058554}
-  fileName: StaticGameObjects_5
+  fileName: StaticGameObjects

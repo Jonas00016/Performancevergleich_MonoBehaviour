@@ -27,7 +27,11 @@ public class PerformanceMeasurer : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
         performanceReportPath = $"Assets/PerformanceReports/{fileName}.csv";
+#else
+        performanceReportPath = $"{Application.dataPath}/PerformanceReports/{fileName}.csv";
+#endif
 
         if (cubeSpawnSystem.enabled)
         {
@@ -66,10 +70,18 @@ public class PerformanceMeasurer : MonoBehaviour
 
     private void SaveCalculations()
     {
+#if UNITY_EDITOR
         if (!File.Exists(performanceReportPath))
         {
             File.WriteAllText(performanceReportPath, "MIN_FPS, AVG_FPS, MAX_FPS, CUBES,");
         }
+#else
+        string directory = performanceReportPath.Substring(0, performanceReportPath.LastIndexOf("/"));
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+#endif
 
         int avgFps = (fpsMeasured == 0 ? 0 : sumFps / fpsMeasured);
 
@@ -110,7 +122,11 @@ public class PerformanceMeasurer : MonoBehaviour
     {
         if (avgFps >= 24) return;
 
+#if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 
     private void CalculateFPSPhysics()

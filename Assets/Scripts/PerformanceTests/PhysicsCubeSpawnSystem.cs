@@ -11,24 +11,30 @@ public class PhysicsCubeSpawnSystem : MonoBehaviour
 
     private float nextTime = 0f;
     private float time = 0f;
-
     private int cubesSpawned = 0;
+
+    public bool selfIncrement = true;
 
     void Update()
     {
+        if (!selfIncrement) return;
+
         time += Time.deltaTime;
 
         if (time < nextTime) return;
         nextTime += 1f / cubesPerSecond;
 
-        SpawnNextWave();
+        SpawnPhysicsCube();
     }
 
-    public void SpawnNextWave()
+    public int SpawnPhysicsCube()
     {
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
         GameObject spawnedCube = Instantiate(prefab, spawnPosition, rotation);
+        cubesSpawned++;
 
         spawnedCube.GetComponent<Rigidbody>().AddForce(Vector3.up * upswing, ForceMode.Impulse);
+
+        return cubesSpawned;
     }
 }

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4725070053588909647}
   - component: {fileID: 6652676970896719057}
   - component: {fileID: 5493777477319915478}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PhysicsCube
-  m_TagString: Untagged
+  m_TagString: PhysicsCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -23,6 +23,8 @@ public class PerformanceMeasurer : MonoBehaviour
     private int incrementations = 0;
     private int spawnAmount = -1;
 
+    private string tempFPSCalculations = "";
+
     void Start()
     {
         performanceReportPath = $"Assets/PerformanceReports/{fileName}.csv";
@@ -32,18 +34,34 @@ public class PerformanceMeasurer : MonoBehaviour
             cubeSpawnSystem.selfIncrement = false;
             spawnAmount = cubeSpawnSystem.spawnAmount;
         }
+
+        if (physicsCubeSpawnSystem.enabled)
+        {
+            physicsCubeSpawnSystem.selfIncrement = false;
+        }
     }
 
     void Update()
     {
         if (Time.time < 1f) return;
 
-        CalculateFPS();
+        if (cubeSpawnSystem.enabled)
+        {
+            CalculateFPS();
 
-        if (Time.time < nextIncrementation) return;
+            if (Time.time < nextIncrementation) return;
 
-        SaveCalculations();
-        IncreaseCubes();
+            SaveCalculations();
+            IncreaseCubes();
+
+            return;
+        }
+        
+        if (physicsCubeSpawnSystem.enabled)
+        {
+            CalculateFPSPhysics();
+            SaveCalculationsPhysics();
+        }
     }
 
     private void SaveCalculations()
@@ -72,8 +90,6 @@ public class PerformanceMeasurer : MonoBehaviour
         incrementations++;
 
         if (cubeSpawnSystem.enabled) cubeSpawnSystem.SpawnNextWave();
-
-        if (physicsCubeSpawnSystem.enabled) physicsCubeSpawnSystem.SpawnNextWave();
     }
 
     private void CalculateFPS()
@@ -92,8 +108,39 @@ public class PerformanceMeasurer : MonoBehaviour
 
     private void CheckForEnd(int avgFps)
     {
-        if (avgFps >= 30) return;
+        if (avgFps >= 24) return;
 
         EditorApplication.ExitPlaymode();
+    }
+
+    private void CalculateFPSPhysics()
+    {
+        fps = (int)(1f / Time.deltaTime);
+
+        fpsMeasured++;
+        sumFps += fps;
+
+        spawnAmount = physicsCubeSpawnSystem.SpawnPhysicsCube();
+    }
+
+    private void SaveCalculationsPhysics()
+    {
+        if (!File.Exists(performanceReportPath))
+        {
+            File.WriteAllText(performanceReportPath, "FPS, CUBES,");
+        }
+
+        tempFPSCalculations += $"\n{fps}, {spawnAmount}";
+
+        if (spawnAmount % 100 != 0) return;
+
+        File.AppendAllText(performanceReportPath, tempFPSCalculations);
+
+        tempFPSCalculations = "";
+
+        CheckForEnd(sumFps / fpsMeasured);
+
+        sumFps = 0;
+        fpsMeasured = 0;
     }
 }

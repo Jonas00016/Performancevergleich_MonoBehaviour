@@ -142,10 +142,18 @@ public class PerformanceMeasurer : MonoBehaviour
 
     private void SaveCalculationsPhysics()
     {
+#if UNITY_EDITOR
         if (!File.Exists(performanceReportPath))
         {
             File.WriteAllText(performanceReportPath, "FPS, CUBES,");
         }
+#else
+        string directory = performanceReportPath.Substring(0, performanceReportPath.LastIndexOf("/"));
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+#endif
 
         tempFPSCalculations += $"\n{fps}, {spawnAmount}";
 

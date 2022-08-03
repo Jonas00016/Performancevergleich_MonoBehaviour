@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnSystem : MonoBehaviour
 {
     private const int MAX_ENEMIES = 100000;
-    private const int SPAWN_AMOUNT = 100;
+    private const int SPAWN_AMOUNT = 500;
     private const float BREAK_TIME = 10f;
 
     private int enemyCount = 0;
@@ -14,6 +14,8 @@ public class EnemySpawnSystem : MonoBehaviour
 
     [SerializeField] GameObject enemyPrefab;
 
+    public bool selfIncrement = true;
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,6 +23,8 @@ public class EnemySpawnSystem : MonoBehaviour
 
     void Update()
     {
+        if (!selfIncrement) return;
+
         timer += Time.deltaTime;
 
         if (enemyCount >= MAX_ENEMIES || timer < BREAK_TIME) return;
@@ -29,7 +33,7 @@ public class EnemySpawnSystem : MonoBehaviour
         SpawnEnemies();
     }
 
-    private void SpawnEnemies()
+    public void SpawnEnemies()
     {
         for (int i = 0; i < SPAWN_AMOUNT; i++)
         {

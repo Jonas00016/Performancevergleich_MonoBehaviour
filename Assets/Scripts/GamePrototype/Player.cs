@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
 
     private Rigidbody rb;
-    private float perSecond = 10f;
+    private float perSecond = 50f;
     private float nextTime = 0f;
 
     void Start()

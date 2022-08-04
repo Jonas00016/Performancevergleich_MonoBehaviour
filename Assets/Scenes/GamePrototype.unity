@@ -272,6 +272,14 @@ PrefabInstance:
       propertyPath: enemySpawnSystem
       value: 
       objectReference: {fileID: 2090885855}
+    - target: {fileID: 6652676970896719057, guid: 1af4db9748006b246933a90f15c9ce9a, type: 3}
+      propertyPath: m_Drag
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846122695622385227, guid: 1af4db9748006b246933a90f15c9ce9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6846122695622385227, guid: 1af4db9748006b246933a90f15c9ce9a, type: 3}
       propertyPath: m_TagString
       value: MainCamera
@@ -348,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2087140772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,5 +555,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 4126597657615545444, guid: 6f8f2f20582ac634087aed6897bfd477, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 4c145c7500fe6584894576f6510b61db, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f8f2f20582ac634087aed6897bfd477, type: 3}

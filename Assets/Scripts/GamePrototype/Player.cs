@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private const float MOVEMENTSPEED = 500f;
+    private const float MOVEMENTSPEED = 200f;
 
     [SerializeField] EnemySpawnSystem enemySpawnSystem;
     [SerializeField] GameObject projectilePrefab;

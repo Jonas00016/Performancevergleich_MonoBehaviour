@@ -21,7 +21,6 @@ public class GamePerformanceMeasurer : MonoBehaviour
     private int enemyCount = 0;
     private float timer = 0f;
     private float timePassed = 0f;
-    private int spawnedEnemies = 0;
 
     void Start()
     {
@@ -69,7 +68,9 @@ public class GamePerformanceMeasurer : MonoBehaviour
 
         int avgFps = (fpsMeasured == 0 ? 0 : sumFps / fpsMeasured);
 
-        File.AppendAllText(performanceReportPath, $"\n{minFps}, {avgFps}, {maxFps}, {spawnedEnemies},");
+        int gameObjectSum = 2 + GameObject.FindGameObjectsWithTag("Enemy").Length + GameObject.FindGameObjectsWithTag("Projectile").Length;
+
+        File.AppendAllText(performanceReportPath, $"\n{minFps}, {avgFps}, {maxFps}, {gameObjectSum},");
 
         CheckForEnd(avgFps);
 
@@ -83,7 +84,6 @@ public class GamePerformanceMeasurer : MonoBehaviour
     {
         timer = 0f;
         enemySpawnSystem.SpawnEnemies();
-        spawnedEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 
     private void CalculateFPS()
